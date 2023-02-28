@@ -1,3 +1,30 @@
+/* eslint-disable semi */
+/* attributes are used
+-- required
+1. nqy-step="step-n" - number of step
+2. nqy-action="next" - next button (even if conditional step, every next button should has this!!!)
+3. nqy-action="previous" - previous button
+
+4. nqy-destination="step-n" - show what is the next step
+nqy-destination="final" -show results
+5. nqy-conditional="step-conditional" - if the next step depends on a chosen option
+6. nqy-destination="step-n" - set to the radio buttons in conditional logic (real radio buttons)
+
+nqy-form-active radio button active class
+nqy-input-error - error class
+
+7. nqy-form="form" - main form
+8. nqy-points="40" -amount of points for each answer (add to radio button)
+
+9. nqy-text="source-n" - reuse the input content
+10. nqy-text="target-n"
+11. nqy-text-button="activator-n"
+
+--final steps
+12. nqy-step="final" - every screen with the result
+13. nqy-range-from="40" - start of the range to show this result
+14. nqy-range-to="100" - end of the range to show this result
+*/
 
 // main variables
 let filledState = true;
@@ -54,7 +81,7 @@ function setForms (userStatus) {
         }
       }
     })
-  } return showError('Please, upgrade the plan');
+  } else { showError('Please, upgrade the plan'); }
 }
 
 // every time the new question appears, check if there are required fields
