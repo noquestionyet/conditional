@@ -141,10 +141,10 @@ if (nextButtons.length !== 0) {
       const nextStepNumber = el.getAttribute('nqy-destination');
       const stepConditional = el.getAttribute('nqy-conditional');
       const stepCopyTarget = el.getAttribute('nqy-text-button');
-      const stepCopyTargetNumber = stepCopyTarget.replace('activator-', '')
+      //const stepCopyTargetNumber = stepCopyTarget.replace('activator-', '')
       nextStepNumber ? nextQuestion(nextStepNumber, quizForm) : null;
       stepConditional ? findNextQuestion(el) : null;
-      stepCopyTargetNumber ? addCustomContent(stepCopyTargetNumber) : null;
+      //stepCopyTargetNumber ? addCustomContent(stepCopyTargetNumber) : null;
     })
   })
 }
