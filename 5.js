@@ -139,6 +139,7 @@ if (nextButtons.length !== 0) {
       const quizForm = el.closest('[nqy-form]');
       console.log(quizForm)
       const nextStepNumber = el.getAttribute('nqy-destination');
+      console.log(nextStepNumber)
       const stepConditional = el.getAttribute('nqy-conditional');
       const stepCopyTarget = el.getAttribute('nqy-text-button');
       //const stepCopyTargetNumber = stepCopyTarget.replace('activator-', '')
@@ -173,6 +174,7 @@ function nextQuestion (stepNumber, quizForm) {
       showResult();
     } else {
       const nextQuestion = quizForm.querySelector(`[nqy-step='${stepNumber}']`);
+      console.log(nextQuestion)
       nextQuestion.classList.add('current-question');
       nextQuestion.style.display = 'block';
       checkRequiredFields(nextQuestion);
