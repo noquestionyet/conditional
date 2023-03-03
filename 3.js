@@ -137,19 +137,14 @@ if (nextButtons.length !== 0) {
   nextButtons.forEach((el) => {
     el.addEventListener('click', () => {
       const quizForm = el.closest('[nqy-form]');
+      console.log(quizForm)
       const nextStepNumber = el.getAttribute('nqy-destination');
       const stepConditional = el.getAttribute('nqy-conditional');
       const stepCopyTarget = el.getAttribute('nqy-text-button');
-      if (nextStepNumber) {
-        nextQuestion(nextStepNumber, quizForm);
-      }
-      if (stepConditional) {
-        findNextQuestion(el);
-      }
-      if (stepCopyTarget) {
-        const stepCopyTargetNumber = stepCopyTarget.replace('activator-', '')
-        addCustomContent(stepCopyTargetNumber);
-      }
+      const stepCopyTargetNumber = stepCopyTarget.replace('activator-', '')
+      nextStepNumber ? nextQuestion(nextStepNumber, quizForm) : null;
+      stepConditional ? findNextQuestion(el) : null;
+      stepCopyTargetNumber ? addCustomContent(stepCopyTargetNumber) : null;
     })
   })
 }
@@ -273,7 +268,7 @@ function pointSum () {
 
 // if we have personalised content, like name, to reuse in the form text
 function addCustomContent (stepCopyTargetNumber) {
-  let sourceTextAttribute = '[nqy-text="source"]';
+  /*let sourceTextAttribute = '[nqy-text="source"]';
   let targetTextAttribute = '[nqy-text="target"]';
   if (stepCopyTargetNumber) {
     sourceTextAttribute = `[nqy-text="source-${stepCopyTargetNumber}"]`;
@@ -283,7 +278,7 @@ function addCustomContent (stepCopyTargetNumber) {
   const targetText = document.querySelector(`${targetTextAttribute}`);
   if (sourceText.value) {
     targetText.innerHTML = sourceText.value;
-  }
+  }*/
 }
 
 // custom active class for radio buttons and checkboxed
