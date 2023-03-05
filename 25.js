@@ -173,7 +173,6 @@ if (nextButtons.length !== 0) {
       const currentQuestion = el.closest('.current-question');
       console.log(currentQuestion)
       const stepCopyTarget = currentQuestion.querySelectorAll('[nqy-text]');
-      console.log(stepCopyTarget)
       if (nextStepNumber) {
         nextQuestion(nextStepNumber, quizForm);
       }
@@ -183,7 +182,8 @@ if (nextButtons.length !== 0) {
       if (stepCopyTarget) {
         for (let i = 0; i < stepCopyTarget.length; i++) {
           console.log(stepCopyTarget[i])
-          const stepCopyTargetNumber = stepCopyTarget[i].replace('source-', '');
+          const stepCopyAttribute = stepCopyTarget[i].getAttribute('nqy-text');
+          const stepCopyTargetNumber = stepCopyAttribute.replace('source-', '');
           addCustomContent(stepCopyTargetNumber);
         }
       }
