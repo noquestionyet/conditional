@@ -170,7 +170,8 @@ if (nextButtons.length !== 0) {
       const quizForm = el.closest('[nqy-form]');
       const nextStepNumber = el.getAttribute('nqy-destination');
       const stepConditional = el.getAttribute('nqy-conditional');
-      const currentQuestion = el.closest('.currentQuestion');
+      const currentQuestion = el.closest('.current-question');
+      console.log(currentQuestion)
       const stepCopyTarget = currentQuestion.getAttribute('nqy-text');
       console.log(stepCopyTarget)
       if (nextStepNumber) {
