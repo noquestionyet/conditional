@@ -97,6 +97,7 @@ if (formShowers) {
 
 // checking the form on activation
 function showForm (formName) {
+  console.log(formName)
   const quizForms = document.querySelectorAll('[nqy-form]');
   quizForms.forEach((quizForm) => {
     const quizFormName = quizForm.getAttribute('nqy-formshow');
