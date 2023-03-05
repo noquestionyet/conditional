@@ -102,7 +102,9 @@ function showForm (formName) {
     const quizFormName = quizForm.getAttribute('nqy-formshow');
     if (quizFormName === formName) {
       quizForm.style.display = 'block';
-      checkRequiredFields(quizForm.querySelector('.current-question'));
+      const currentQuestion = quizForm.querySelector('.current-question');
+      console.log(currentQuestion);
+      checkRequiredFields(currentQuestion);
     }
   })
 }
