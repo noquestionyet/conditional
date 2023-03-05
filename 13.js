@@ -18,12 +18,15 @@ nqy-input-error - error class
 
 9. nqy-text="source-n" - reuse the input content
 10. nqy-text="target-n"
-11. nqy-text-button="activator-n"
+11. nqy-text-button="activator-n" //!!!!!rewrite this with every next step
 
 --final steps
 12. nqy-step="final" - every screen with the result
 13. nqy-range-from="40" - start of the range to show this result
 14. nqy-range-to="100" - end of the range to show this result
+
+---show specific forms
+nqy-formshow = "form-name" - add to the link and form
 */
 
 // main variables
@@ -77,6 +80,8 @@ function setForms (userStatus) {
         if (i === 0) {
           questionSteps[i].style.display = 'block';
           questionSteps[i].classList.add('current-question');
+          const formShowers = document.querySelectorAll('[nqy-formshow]');
+          !formShowers ? checkRequiredFields(currentQuestion) : null;
         }
       }
     })
@@ -90,12 +95,13 @@ if (formShowers) {
     quizForm.style.display = 'none';
   });
   formShowers.forEach((formShower) => {
-    const quizFormName = formShower.getAttribute('nqy-formshow');
-    formShower.addEventListener('click', showForm(quizFormName));
+    if (formShower.tagName === 'a') {
+      const quizFormName = formShower.getAttribute('nqy-formshow');
+      formShower.addEventListener('click', showForm(quizFormName));
+    }
   })
 }
 
-// checking the form on activation
 function showForm (formName) {
   console.log(formName)
   const quizForms = document.querySelectorAll('[nqy-form]');
@@ -114,7 +120,6 @@ function showForm (formName) {
 // call validatation func on every input change
 function checkRequiredFields (currentQuestion) {
   const requiredFields = currentQuestion.querySelectorAll('[required]');
-  console.log(requiredFields)
   if (requiredFields.length !== 0) {
     currentQuestion.querySelector('[nqy-action="next"]').style.opacity = '0.6';
     filledState = false;
@@ -124,7 +129,6 @@ function checkRequiredFields (currentQuestion) {
       })
     })
   }
-  console.log(filledState)
 }
 
 // validate if required fields were filled
@@ -165,15 +169,19 @@ if (nextButtons.length !== 0) {
   nextButtons.forEach((el) => {
     el.addEventListener('click', () => {
       const quizForm = el.closest('[nqy-form]');
-      console.log(quizForm)
       const nextStepNumber = el.getAttribute('nqy-destination');
-      console.log(nextStepNumber)
       const stepConditional = el.getAttribute('nqy-conditional');
       const stepCopyTarget = el.getAttribute('nqy-text-button');
-      //const stepCopyTargetNumber = stepCopyTarget.replace('activator-', '')
-      nextStepNumber ? nextQuestion(nextStepNumber, quizForm) : null;
-      stepConditional ? findNextQuestion(el) : null;
-      //stepCopyTargetNumber ? addCustomContent(stepCopyTargetNumber) : null;
+      if (nextStepNumber) {
+        nextQuestion(nextStepNumber, quizForm);
+      }
+      if (stepConditional) {
+        findNextQuestion(el);
+      }
+      if (stepCopyTarget) {
+        const stepCopyTargetNumber = stepCopyTarget.replace('activator-', '')
+        addCustomContent(stepCopyTargetNumber);
+      }
     })
   })
 }
@@ -192,7 +200,6 @@ if (previousButtons.length !== 0) {
 // show next question
 function nextQuestion (stepNumber, quizForm) {
   const currentQuestion = quizForm.querySelector('.current-question');
-  console.log(filledState)
   if (filledState) {
     savePoints(currentQuestion);
     const existingStepFlow = sessionStorage.getItem('stepFlow');
@@ -203,10 +210,9 @@ function nextQuestion (stepNumber, quizForm) {
       showResult();
     } else {
       const nextQuestion = quizForm.querySelector(`[nqy-step='${stepNumber}']`);
-      console.log(nextQuestion)
       nextQuestion.classList.add('current-question');
       nextQuestion.style.display = 'block';
-      checkRequiredFields(currentQuestion);
+      checkRequiredFields(nextQuestion);
     }
   } else { requiredFileds(currentQuestion) }
 }
@@ -299,7 +305,7 @@ function pointSum () {
 
 // if we have personalised content, like name, to reuse in the form text
 function addCustomContent (stepCopyTargetNumber) {
-  /*let sourceTextAttribute = '[nqy-text="source"]';
+  let sourceTextAttribute = '[nqy-text="source"]';
   let targetTextAttribute = '[nqy-text="target"]';
   if (stepCopyTargetNumber) {
     sourceTextAttribute = `[nqy-text="source-${stepCopyTargetNumber}"]`;
@@ -309,7 +315,7 @@ function addCustomContent (stepCopyTargetNumber) {
   const targetText = document.querySelector(`${targetTextAttribute}`);
   if (sourceText.value) {
     targetText.innerHTML = sourceText.value;
-  }*/
+  }
 }
 
 // custom active class for radio buttons and checkboxed
