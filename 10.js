@@ -79,18 +79,37 @@ function setForms (userStatus) {
           questionSteps[i].classList.add('current-question');
         }
       }
-      if(quizForm.style.diplay !== 'none'){
-        checkRequiredFields(quizForm);
-        console.log(quizForm)
-      }
     })
   } else { showError('Please, upgrade the plan'); }
 }
 
+const formShowers = document.querySelectorAll('[nqy-formshow]');
+if (formShowers) {
+  const quizForms = document.querySelectorAll('[nqy-form]');
+  quizForms.forEach((quizForm) => {
+    quizForm.style.display = 'none';
+  });
+  formShowers.forEach((formShower) => {
+    const quizFormName = formShower.getAttribute('nqy-formshow');
+    formShower.addEventListener('click', showForm(quizFormName));
+  })
+}
+
+// checking the form on activation
+function showForm (formName) {
+  const quizForms = document.querySelectorAll('[nqy-form]');
+  quizForms.forEach((quizForm) => {
+    const quizFormName = quizForm.getAttribute('nqy-formshow');
+    if (quizFormName === formName) {
+      quizForm.style.display = 'block';
+      checkRequiredFields(quizForm.querySelector('.current-question'));
+    }
+  })
+}
+
 // every time the new question appears, check if there are required fields
 // call validatation func on every input change
-function checkRequiredFields (currentQuiz) {
-  const currentQuestion = currentQuiz.querySelector('.current-question');
+function checkRequiredFields (currentQuestion) {
   const requiredFields = currentQuestion.querySelectorAll('[required]');
   console.log(requiredFields)
   if (requiredFields.length !== 0) {
@@ -184,7 +203,7 @@ function nextQuestion (stepNumber, quizForm) {
       console.log(nextQuestion)
       nextQuestion.classList.add('current-question');
       nextQuestion.style.display = 'block';
-      checkRequiredFields(quizForm);
+      checkRequiredFields(currentQuestion);
     }
   } else { requiredFileds(currentQuestion) }
 }
