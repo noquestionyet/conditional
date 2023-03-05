@@ -77,9 +77,9 @@ function setForms (userStatus) {
         if (i === 0) {
           questionSteps[i].style.display = 'block';
           questionSteps[i].classList.add('current-question');
-          checkRequiredFields(quizForm);
         }
       }
+      quizForm.style.diplay !== 'none' ? checkRequiredFields(quizForm) : null;
     })
   } else { showError('Please, upgrade the plan'); }
 }
@@ -89,6 +89,7 @@ function setForms (userStatus) {
 function checkRequiredFields (currentQuiz) {
   const currentQuestion = currentQuiz.querySelector('.current-question');
   const requiredFields = currentQuestion.querySelectorAll('[required]');
+  console.log(requiredFields)
   if (requiredFields.length !== 0) {
     currentQuestion.querySelector('[nqy-action="next"]').style.opacity = '0.6';
     filledState = false;
