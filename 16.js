@@ -96,7 +96,7 @@ if (formShowers) {
   });
   formShowers.forEach((formShower) => {
     console.log(formShower.tagName)
-    if (formShower.tagName === 'a') {
+    if (formShower.tagName === 'A') {
       console.log(formShower)
       const quizFormName = formShower.getAttribute('nqy-formshow');
       formShower.addEventListener('click', showForm(quizFormName));
