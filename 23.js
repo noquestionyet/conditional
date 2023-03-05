@@ -182,7 +182,8 @@ if (nextButtons.length !== 0) {
       }
       if (stepCopyTarget) {
         for (let i = 0; i < stepCopyTarget.length; i++) {
-          const stepCopyTargetNumber = stepCopyTarget[i].replace('source-', '');
+          console.log(stepCopyTarget)
+          const stepCopyTargetNumber = stepCopyTarget[i].value.replace('source-', '');
           addCustomContent(stepCopyTargetNumber);
         }
       }
