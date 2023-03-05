@@ -170,7 +170,9 @@ if (nextButtons.length !== 0) {
       const quizForm = el.closest('[nqy-form]');
       const nextStepNumber = el.getAttribute('nqy-destination');
       const stepConditional = el.getAttribute('nqy-conditional');
-      const stepCopyTarget = el.getAttribute('nqy-text-button');
+      const currentQuestion = el.closest('.currentQuestion');
+      const stepCopyTarget = currentQuestion.getAttribute('nqy-text');
+      console.log(stepCopyTarget)
       if (nextStepNumber) {
         nextQuestion(nextStepNumber, quizForm);
       }
@@ -178,7 +180,7 @@ if (nextButtons.length !== 0) {
         findNextQuestion(el);
       }
       if (stepCopyTarget) {
-        const stepCopyTargetNumber = stepCopyTarget.replace('activator-', '')
+        const stepCopyTargetNumber = stepCopyTarget.replace('source-', '')
         addCustomContent(stepCopyTargetNumber);
       }
     })
@@ -311,9 +313,11 @@ function addCustomContent (stepCopyTargetNumber) {
     targetTextAttribute = `[nqy-text="target-${stepCopyTargetNumber}"]`;
   }
   const sourceText = document.querySelector(`${sourceTextAttribute}`);
-  const targetText = document.querySelector(`${targetTextAttribute}`);
+  const targetText = document.querySelectorAll(`${targetTextAttribute}`);
   if (sourceText.value) {
-    targetText.innerHTML = sourceText.value;
+    for (let i = 0; i < targetText.length; i++) {
+      targetText[i].innerHTML = sourceText.value;
+    }
   }
 }
 
