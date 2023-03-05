@@ -90,16 +90,16 @@ function setForms (userStatus) {
 
 const formShowers = document.querySelectorAll('[nqy-formshow]');
 if (formShowers) {
-  const quizForms = document.querySelectorAll('[nqy-form]');
-  quizForms.forEach((quizForm) => {
-    quizForm.style.display = 'none';
+  formShowers.forEach((quizForm) => {
+    if (quizForm.getAttribute('nqy-form')) {
+      quizForm.style.display = 'none';
+    }
   });
   formShowers.forEach((formShower) => {
-    console.log(formShower.tagName)
     if (formShower.tagName === 'A') {
       console.log(formShower)
       const quizFormName = formShower.getAttribute('nqy-formshow');
-      formShower.addEventListener('click', function(){
+      formShower.addEventListener('click', function () {
         showForm(quizFormName)
       });
     }
@@ -107,7 +107,6 @@ if (formShowers) {
 }
 
 function showForm (formName) {
-  console.log(formName)
   const quizForms = document.querySelectorAll('[nqy-form]');
   quizForms.forEach((quizForm) => {
     const quizFormName = quizForm.getAttribute('nqy-formshow');
@@ -115,7 +114,6 @@ function showForm (formName) {
     if (quizFormName === formName) {
       quizForm.style.display = 'block';
       const currentQuestion = quizForm.querySelector('.current-question');
-      console.log(currentQuestion);
       checkRequiredFields(currentQuestion);
     }
   })
