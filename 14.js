@@ -96,6 +96,7 @@ if (formShowers) {
   });
   formShowers.forEach((formShower) => {
     if (formShower.tagName === 'a') {
+      console.log(formShower)
       const quizFormName = formShower.getAttribute('nqy-formshow');
       formShower.addEventListener('click', showForm(quizFormName));
     }
@@ -107,6 +108,7 @@ function showForm (formName) {
   const quizForms = document.querySelectorAll('[nqy-form]');
   quizForms.forEach((quizForm) => {
     const quizFormName = quizForm.getAttribute('nqy-formshow');
+    console.log(quizFormName)
     if (quizFormName === formName) {
       quizForm.style.display = 'block';
       const currentQuestion = quizForm.querySelector('.current-question');
