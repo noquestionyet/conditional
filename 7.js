@@ -77,7 +77,7 @@ function setForms (userStatus) {
         if (i === 0) {
           questionSteps[i].style.display = 'block';
           questionSteps[i].classList.add('current-question');
-          checkRequiredFields(questionSteps[i]);
+          checkRequiredFields(quizForm);
         }
       }
     })
@@ -86,7 +86,8 @@ function setForms (userStatus) {
 
 // every time the new question appears, check if there are required fields
 // call validatation func on every input change
-function checkRequiredFields (currentQuestion) {
+function checkRequiredFields (currentQuiz) {
+  const currentQuestion = currentQuiz.querySelector('.current-question');
   const requiredFields = currentQuestion.querySelectorAll('[required]');
   if (requiredFields.length !== 0) {
     currentQuestion.querySelector('[nqy-action="next"]').style.opacity = '0.6';
@@ -179,7 +180,7 @@ function nextQuestion (stepNumber, quizForm) {
       console.log(nextQuestion)
       nextQuestion.classList.add('current-question');
       nextQuestion.style.display = 'block';
-      checkRequiredFields(nextQuestion);
+      checkRequiredFields(quizForm);
     }
   } else { requiredFileds(currentQuestion) }
 }
