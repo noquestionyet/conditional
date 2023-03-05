@@ -172,7 +172,7 @@ if (nextButtons.length !== 0) {
       const stepConditional = el.getAttribute('nqy-conditional');
       const currentQuestion = el.closest('.current-question');
       console.log(currentQuestion)
-      const stepCopyTarget = currentQuestion.getAttribute('nqy-text');
+      const stepCopyTarget = currentQuestion.querySelectorAll('[nqy-text]');
       console.log(stepCopyTarget)
       if (nextStepNumber) {
         nextQuestion(nextStepNumber, quizForm);
@@ -181,8 +181,10 @@ if (nextButtons.length !== 0) {
         findNextQuestion(el);
       }
       if (stepCopyTarget) {
-        const stepCopyTargetNumber = stepCopyTarget.replace('source-', '')
-        addCustomContent(stepCopyTargetNumber);
+        for (let i = 0; i < stepCopyTarget.length; i++) {
+          const stepCopyTargetNumber = stepCopyTarget[i].replace('source-', '');
+          addCustomContent(stepCopyTargetNumber);
+        }
       }
     })
   })
