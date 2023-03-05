@@ -79,7 +79,10 @@ function setForms (userStatus) {
           questionSteps[i].classList.add('current-question');
         }
       }
-      quizForm.style.diplay !== 'none' ? checkRequiredFields(quizForm) : null;
+      if(quizForm.style.diplay !== 'none'){
+        checkRequiredFields(quizForm);
+        console.log(quizForm)
+      }
     })
   } else { showError('Please, upgrade the plan'); }
 }
