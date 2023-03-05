@@ -95,6 +95,7 @@ if (formShowers) {
     quizForm.style.display = 'none';
   });
   formShowers.forEach((formShower) => {
+    console.log(formShower.tagName)
     if (formShower.tagName === 'a') {
       console.log(formShower)
       const quizFormName = formShower.getAttribute('nqy-formshow');
