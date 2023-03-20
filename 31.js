@@ -85,7 +85,6 @@ function setForms (userStatus) {
           questionSteps[i].style.display = 'block';
           questionSteps[i].classList.add('current-question');
           if (formShowers.length !== 0) {
-            console.log(formShowers)
             quizForm.style.display = 'none';
           } else { checkRequiredFields(questionSteps[i]) }
         }
@@ -183,6 +182,7 @@ if (nextButtons.length !== 0) {
       const nextStepNumber = el.getAttribute('nqy-destination');
       const stepConditional = el.getAttribute('nqy-conditional');
       const currentQuestion = el.closest('.current-question');
+      console.log(currentQuestion)
       const stepCopyTarget = currentQuestion.querySelectorAll('[nqy-text]');
       if (nextStepNumber) {
         nextQuestion(nextStepNumber, quizForm);
