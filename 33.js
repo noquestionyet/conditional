@@ -176,21 +176,23 @@ function validationError (currentQuestion) {
 // call next question function on each "next question" button click
 const nextButtons = document.querySelectorAll('[nqy-action="next"]');
 if (nextButtons.length !== 0) {
-  nextButtons.forEach((el) => {
-    el.addEventListener('click', () => {
-      const quizForm = el.closest('[nqy-form]');
-      const nextStepNumber = el.getAttribute('nqy-destination');
-      const stepConditional = el.getAttribute('nqy-conditional');
-      const currentQuestion = el.closest('.current-question');
-      console.log(currentQuestion)
-      console.log(el)
+  nextButtons.forEach((nextButton) => {
+    // if we have "next buttons"
+    nextButton.addEventListener('click', () => {
+      const quizForm = nextButton.closest('[nqy-form]');
+      const nextStepNumber = nextButton.getAttribute('nqy-destination');
+      const stepConditional = nextButton.getAttribute('nqy-conditional');
+      const currentQuestion = nextButton.closest('.current-question');
       const stepCopyTarget = currentQuestion.querySelectorAll('[nqy-text]');
+      // simple logic next step call
       if (nextStepNumber) {
         nextQuestion(nextStepNumber, quizForm);
       }
+      // conditional logic next step call
       if (stepConditional) {
-        findNextQuestion(el);
+        findNextQuestion(nextButton);
       }
+      // add custom content from inputs
       if (stepCopyTarget) {
         for (let i = 0; i < stepCopyTarget.length; i++) {
           const stepCopyAttribute = stepCopyTarget[i].getAttribute('nqy-text');
