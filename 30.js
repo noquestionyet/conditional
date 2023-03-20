@@ -84,7 +84,7 @@ function setForms (userStatus) {
         if (i === 0) {
           questionSteps[i].style.display = 'block';
           questionSteps[i].classList.add('current-question');
-          if (formShowers) {
+          if (formShowers.length !== 0) {
             console.log(formShowers)
             quizForm.style.display = 'none';
           } else { checkRequiredFields(questionSteps[i]) }
