@@ -183,6 +183,7 @@ if (nextButtons.length !== 0) {
       const stepConditional = el.getAttribute('nqy-conditional');
       const currentQuestion = el.closest('.current-question');
       console.log(currentQuestion)
+      console.log(el)
       const stepCopyTarget = currentQuestion.querySelectorAll('[nqy-text]');
       if (nextStepNumber) {
         nextQuestion(nextStepNumber, quizForm);
